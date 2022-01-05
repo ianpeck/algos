@@ -16,5 +16,16 @@ def findvalue(n, dict):
     # finding the index of your number and using it to find it's matching key
     return list(dict.keys())[list(dict.values()).index(my_num)]
 
+# Additional way (iterates though, is slower)
+def findvalue2(n,dict):
+    my_unique_list = list(set(dict.values()))
+    my_unique_list.sort()
+    my_num = my_unique_list[-n]
+    for key, value in list(dict.items()):
+        if value == my_num:
+            return key
+
+
     
 print(findvalue(3, {"a":1, "b": 2, "c": 100, "d": 30, "f":30}))
+print(findvalue2(3, {"a":1, "b": 2, "c": 100, "d": 30, "f":30}))
