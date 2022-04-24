@@ -1,4 +1,4 @@
-# Given a list, find the frequency of each value in it
+# Given a list, find the frequency of each value in it and place it into a dictionary
 
 AList = ['string', 'string', 'ape', 'fling', 'ape', 'monk', 'Ian', '4', 'ape', 'monk', 'celery', 'tidal', 'string']
 
