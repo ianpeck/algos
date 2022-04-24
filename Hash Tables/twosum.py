@@ -12,7 +12,6 @@ def twoSum(nums, target):
         if num in duotable:
             # Return list of indexes of compliment and number if it exists in the hash table
             return [duotable[num], i]
-            break
         else:
             # Add compliment of your num and index of your num to hash table (dictionary) to future referencing
             # target-num (your duo) is the key of your duotable dictionary, its index (i) is the value
