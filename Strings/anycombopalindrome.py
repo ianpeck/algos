@@ -6,9 +6,8 @@ def is_palindrome(s):
     for letter in s:
         if s.count(letter) % 2 != 0:
             odd_counter += 1
-
-    if odd_counter > 1:
-        return False
+        if odd_counter > 1:
+            return False
     return True
 
-print(is_palindrome('rarayraaryj'))
+print(is_palindrome('rqarayraaryj'))
