@@ -4,7 +4,7 @@ def find_combos_pairs(mylist, target):
     my_pairs = []
     hashmap = {}
     for i in range(len(mylist)//2):
-        # if the target pair is in the list, the number is not the same index (the same 5 and 5 cannot add to 10), and the pair is not already in there
+        # if the target pair is in the list, the number is not the same index (the same 5 and 5 cannot add to 10), and the pair is not already in there, and number has not already been a pair
         if target - mylist[i] in mylist and mylist.index(target - mylist[i]) != i and i not in hashmap: 
             my_pairs.append([mylist[i], target - mylist[i]])
             hashmap[mylist.index(target - mylist[i])] = target - mylist[i]
