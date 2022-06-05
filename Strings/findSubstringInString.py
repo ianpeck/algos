@@ -7,7 +7,10 @@ def findSubstring(mystring,mysubstring):
 
 def findSubstringIndices(mystring, mysubstring):
     # Iterates the length of the string, checking if the string starts with our substring at each index
-    result = [i for i in range(len(mystring)) if mystring.startswith(mysubstring,i) is True]
+    result = []
+    for i in range(len(mystring)):
+        if mystring.startswith(mysubstring, i):
+            result.append(i)
     return result
     # Alternative way to do the first function (findSubstring) is to just return the lenth of this variable below.
     return len(result)
