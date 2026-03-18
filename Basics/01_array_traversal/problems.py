@@ -81,7 +81,7 @@ def reverse_iterate(nums):
 # Return pairs of each element with its neighbor
 def pair_adjacent(nums):
     pairs = []
-    for i in range(len(nums) - 1): # subtract 1 from range loop that is len of list (up until last value then stop)
+    for i in range(len(nums) - 1): # subtract 1 from range loop that is len of list (up until last value then stop since we use next value in list)
         pairs.append((nums[i],nums[i+1])) # enter a tuple of cur and next value
     return pairs
 
