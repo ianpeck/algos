@@ -11,26 +11,43 @@ Run this file: python3 problems.py
 # Modify the list in place so first and last elements are swapped
 # Return the list
 def swap_first_last(nums):
-    pass
+    nums[0], nums[-1] = nums[-1], nums[0] # -1 is last items in list, swap with first item at index 0
+    return nums
 
 
 # --- Problem 2: Remove all occurrences ---
 # Return a new list with all occurrences of target removed
+# Removal cheat sheet:
+#   .remove(val)   — removes first occurrence by VALUE, errors if not found
+#   .pop(i)        — removes and returns element at INDEX i, default last
+#   list comp      — [x for x in nums if x != target] builds a new filtered list
 def remove_all(nums, target):
-    pass
+    for num in nums:
+        if num == target:
+            nums.remove(num) # remove mutates the list in place, removes first occurrence of value
+    return nums
 
 
 # --- Problem 3: Rotate left by k ---
 # [1,2,3,4,5] rotated left by 2 => [3,4,5,1,2]
 def rotate_left(nums, k):
-    pass
+    return nums[k:] + nums[:k] # slice from k to end, then add slice from start to k
 
 
 # --- Problem 4: Interleave two arrays ---
-# Given [1,2,3] and [a,b,c], return [1,a,2,b,3,c]
+# Given [1,2,3] and [a,b,c,d] return [1,a,2,b,3,c,d]
 # If one is longer, append the remaining elements
 def interleave(a, b):
-    pass
+    woven_list = []
+    for i in range(max(len(a), len(b))): # go up until larger list is down with iterations
+        # append a value from list a in conjunction with current i
+        if i < len(a): # stop once current i is larger than the list length
+            woven_list.append(a[i])
+        # append a value from list b in conjunction with current i
+        if i < len(b):
+            woven_list.append(b[i])
+    return woven_list
+
 
 
 # --- Problem 5: Flatten nested list (one level) ---

@@ -72,6 +72,11 @@ def running_total(nums):
 
 # --- Problem 7: Reverse iteration ---
 # Return elements in reverse order as a list
+# Looping backwards cheat sheet:
+#   enumerate(nums[::-1])  — reverse values, i is 0,1,2 (not original indices)
+#   reversed(nums)         — reverse iterator, no index
+#   range(len(nums)-1,-1,-1) — original indices counting down
+#   nums[::-1]             — slice, returns new reversed list
 def reverse_iterate(nums):
     return nums[::-1]
 
