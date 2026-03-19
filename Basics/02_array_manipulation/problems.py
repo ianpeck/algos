@@ -53,29 +53,51 @@ def interleave(a, b):
 # --- Problem 5: Flatten nested list (one level) ---
 # [[1,2], [3,4], [5]] => [1,2,3,4,5]
 # Only one level deep — don't worry about deeply nested
+# call also use .extend() and skip inner loop
 def flatten(nested):
-    pass
+    flattened_list = []
+    for small_list in nested:
+        for num in small_list:
+            flattened_list.append(num)
+    return flattened_list
+
 
 
 # --- Problem 6: Chunk array ---
 # Split array into chunks of size n
 # [1,2,3,4,5] with n=2 => [[1,2], [3,4], [5]]
+# for i in range(start, end, step) is a common pattern for chunking, where step is the chunk size
 def chunk(nums, n):
-    pass
+    chunked = []
+    for i in range(0, len(nums), n):
+        chunked.append(nums[i:i+n]) # slice from i to i+n (exclusive) to get chunk of size n (0-2 for example)
+    return chunked
+
+
+
 
 
 # --- Problem 7: Move zeros to end ---
 # [0, 1, 0, 3, 12] => [1, 3, 12, 0, 0]
 # Maintain relative order of non-zero elements
 def move_zeros(nums):
-    pass
+    non_zero_list = [x for x in nums if x != 0]
+    return non_zero_list + ([0] * (len(nums) - len(non_zero_list))) # add as many 0's as difffernce in length of full list vs. non-zero list
+
 
 
 # --- Problem 8: Deduplicate (keep order) ---
 # [1, 3, 2, 3, 1, 4] => [1, 3, 2, 4]
 # Remove duplicates but keep the first occurrence in original order
+# set stores deduped values in hash table, so we can check if we've seen a value before in O(1) time. We also need to maintain a list of deduped values in order. 
 def deduplicate(nums):
-    pass
+    seen = set()
+    deduped_list = []
+    for num in nums:
+        if num not in seen:
+            seen.add(num)
+            deduped_list.append(num)
+    return deduped_list
 
 
 # ============ TESTS ============
