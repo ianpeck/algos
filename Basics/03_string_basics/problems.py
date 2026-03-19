@@ -10,54 +10,90 @@ Run this file: python3 problems.py
 # --- Problem 1: Count vowels ---
 # Return the number of vowels (a, e, i, o, u) in a string (case insensitive)
 def count_vowels(s):
-    pass
+    count = 0
+    for letter in s:
+        if letter in 'aeiouAEIOU':
+            count += 1
+    return count
 
 
 # --- Problem 2: Reverse a string ---
-# Reverse without using slicing or reversed()
 def reverse_string(s):
-    pass
+    return s[::-1] # slice with step of -1 to reverse string
 
 
 # --- Problem 3: Is palindrome ---
 # Check if a string reads the same forwards and backwards (case insensitive)
 # Ignore spaces
 def is_palindrome(s):
-    pass
-
+    string = s.lower().replace(" ","")
+    if string == string[::-1]:
+        return True
+    else:
+        return False
 
 # --- Problem 4: Character frequency ---
 # Return a dict of {char: count} for each character in the string
 # e.g. "aab" => {'a': 2, 'b': 1}
 def char_frequency(s):
-    pass
+    char_dict = {}
+    for char in s:
+        if char in char_dict:
+            char_dict[char] += 1 # add 1 to existing count
+        else:
+            char_dict[char] = 1 # initialize count to 1 for new character
+    return char_dict
 
 
 # --- Problem 5: First non-repeating character ---
 # Return the first character that appears only once
 # Return None if all repeat
 def first_unique_char(s):
-    pass
+    char_counter= {}
+    for char in s:
+        if char in char_counter:
+            char_counter[char] += 1 # add 1 to existing count
+        else:
+            char_counter[char] = 1 # initialize count to 1 for new character
+    for char in s:
+        if char_counter[char] == 1: # check if count is 1 for current character in original string order
+            return char
+    return None
+
 
 
 # --- Problem 6: Compress string ---
 # "aaabbc" => "a3b2c1"
 # If compressed is not shorter, return the original string
 def compress(s):
-    pass
+    final_string = ""
+    char_dict = char_frequency(s) # use char counter function
+    for key, value in char_dict.items(): # loop through the dict of letters and counts and concat them to empty string
+        final_string += (key + str(value))
+    return final_string
 
 
 # --- Problem 7: Are anagrams ---
 # Check if two strings are anagrams of each other (case insensitive, ignore spaces)
 def are_anagrams(s1, s2):
-    pass
+    def clean_string(s):
+        return s.replace(" ","").lower()
+    return sorted(clean_string(s1)) == sorted(clean_string(s2)) # sort the strings after clean and set them equal
 
 
 # --- Problem 8: Title case ---
 # "hello world foo" => "Hello World Foo"
 # Don't use .title() — do it manually
 def title_case(s):
-    pass
+    final_string = ""
+    word_list = s.split(" ")
+    for word in word_list:
+        final_string += word[0].upper() + word[1::] + " "
+    return final_string.strip()
+
+        
+
+
 
 
 # ============ TESTS ============
