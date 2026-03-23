@@ -11,27 +11,53 @@ Run this file: python3 problems.py
 # --- Problem 1: Is sorted ---
 # Check if array is sorted in ascending order using two adjacent pointers
 def is_sorted(nums):
-    pass
+    # left should always be lower than right to be sorted
+    left = 0
+    right = 1
+    while right < len(nums): # while the list still has room to loop
+        if nums[left] <= nums[right]: # left number is less than or equal to right number
+            left += 1
+            right += 1
+        else:
+            return False
+    return True
 
 
 # --- Problem 2: Reverse array in place ---
 # Use left/right pointers to reverse. Modify the list in place, return it.
+# [1,2,3,4] => [4,3,2,1]
 def reverse_in_place(nums):
-    pass
+    left = 0
+    right = len(nums) - 1
+    while right > left:
+        nums[right], nums[left] = nums[left], nums[right]
+        left += 1
+        right -= 1
+    return nums
+
 
 
 # --- Problem 3: Two sum sorted ---
 # Given a SORTED array and target, find two numbers that add to target
 # Return their indices as a tuple. Use two pointers, not a dict.
 def two_sum_sorted(nums, target):
-    pass
+    left = 0
+    right = len(nums) - 1
+    while right > left:
+        if nums[left] + nums[right] > target:
+            right -= 1
+        elif nums[left] + nums[right] < target:
+            left += 1
+        elif nums[left] + nums[right] == target:
+            return (left, right)
+    return None
 
 
 # --- Problem 4: Remove duplicates from sorted array ---
 # Given sorted array, remove dupes in place and return the new length
 # e.g. [1,1,2,2,3] => first 3 elements should be [1,2,3], return 3
 def remove_dupes_sorted(nums):
-    pass
+
 
 
 # --- Problem 5: Container with most water (simplified) ---

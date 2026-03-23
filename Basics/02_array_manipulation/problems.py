@@ -22,10 +22,7 @@ def swap_first_last(nums):
 #   .pop(i)        — removes and returns element at INDEX i, default last
 #   list comp      — [x for x in nums if x != target] builds a new filtered list
 def remove_all(nums, target):
-    for num in nums:
-        if num == target:
-            nums.remove(num) # remove mutates the list in place, removes first occurrence of value
-    return nums
+    return [x for x in nums if x != target]
 
 
 # --- Problem 3: Rotate left by k ---
