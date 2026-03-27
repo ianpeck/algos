@@ -77,16 +77,21 @@ def merge_sum(d1, d2):
 
 
 
-
+from collections import defaultdict
 # --- Problem 6: Most frequent element ---
 # Return the element that appears most often in a list
 # If tie, return any of them
+# if no default dict, then use dict.get(key, 0)
 def most_frequent(nums):
-    seen = {}
+    seen = defaultdict(int)
+    largest_count = 0
+    largest_count_num = 0
     for num in nums:
-        seen[num] = seen.get(num,0) + 1 # cummulative frequency counter, add 1 if in dict, set to 1 if not
-    return max(seen, key=seen.get) 
-
+        seen[num] += 1
+        if seen[num] > largest_count:
+            largest_count = seen[num]
+            largest_count_num = num
+    return largest_count_num
 
 # --- Problem 7: Are all values unique ---
 # Given a list, return True if no element appears more than once, False otherwise
