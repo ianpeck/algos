@@ -53,8 +53,24 @@ def left_join(users, orders):
 # Given a list of events with "user_id", return the top k user_ids by count
 # Return as a list sorted descending by count
 # If tie, either order is fine
+# events = [{"user_id": 1}, {"user_id": 2}, {"user_id": 1}, {"user_id": 3}, {"user_id": 1}, {"user_id": 2}]
+# sorted(people, key=lambda person: person.age, reverse=True) - sorts people in the people dict in desc order
+from collections import defaultdict
 def top_k_users(events, k):
-    pass
+    counts = defaultdict(int)
+    result = []
+    for d in events:
+        actual_user_id = d['user_id']
+        counts[actual_user_id] += 1
+    # we have a count of every user_id now we need to sort id's by count DESC
+    # key=lambda x: x[1] tells use to sort by second value, reverse= True is descending order
+    final_list = sorted(counts.items(), key=lambda pair: pair[1], reverse=True) # this gives us a list of tuples [(user_id, count), (user_id, count)]
+    top_k = final_list[:k] # get the top k tuples pairs from the sorted list 
+    for user_id, _ in top_k: # could also put the word count instead of _ but we don't actually need it for the result, we just need the user_id
+        result.append(user_id) # append just the user_id to the result list
+    return result
+        
+
 
 
 # ============ TESTS ============
