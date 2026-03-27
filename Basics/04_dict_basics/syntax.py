@@ -18,7 +18,7 @@ d.setdefault("key", [])        # insert default if key missing, then return it
 
 # Nested dicts
 d = {"a": {"x": 1, "y": 2}}
-d["a"]["x"]                    # access nested value
+d["a"]["x"]                    # access nested value 1
 d.setdefault("b", {})["z"] = 3 # safely add to nested
 
 # defaultdict — never need to initialize a key

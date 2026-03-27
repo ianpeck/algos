@@ -153,16 +153,18 @@ def group_by_dept(records):
 # [{"id": "a", "value": 10}, {"id": "b", "value": 5}, {"id": "a", "value": 30}]
 # => {"a": {"sum": 40, "count": 2, "avg": 20.0}, "b": {"sum": 5, "count": 1, "avg": 5.0}}
 def aggregate_stats(records):
-    stats = {}
-    for record in records:
-        id = record["id"]
-        val = record["value"]
-        if id not in stats:
-            stats[id] = {"sum": 0, "count": 0, "avg": 0.0}
-        stats[id]["sum"] += val
-        stats[id]["count"] += 1
-        stats[id]["avg"] = round(stats[id]["sum"] / stats[id]["count"], 2)
-    return stats
+    final_dict = {}
+    for row in records:
+        id = row["id"] # set vars early as to not be confusing
+        val = row["value"]
+        if id not in final_dict: # insert a blank default dict in if id not in final dict
+            final_dict[id] = {"sum": 0, "count": 0, 'avg': 0}
+        final_dict[id]['sum'] += val
+        final_dict[id]['count'] += 1
+        final_dict[id]['avg'] = round(final_dict[id]['sum'] / final_dict[id]['count'], 1) # round to 1 decimal
+    return final_dict
+
+
 
 
 # ============ TESTS ============
