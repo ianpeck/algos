@@ -12,7 +12,11 @@ Run this file: python3 problems.py
 # return a dict of {user_id: count}
 # [{"user_id": 1}, {"user_id": 2}, {"user_id": 1}] => {1: 2, 2: 1}
 def count_per_user(events):
-    pass
+    count_dict = defaultdict(int)
+    for d in events:
+        count_dict[d['user_id']] +=1
+    return count_dict
+
 
 
 # --- Problem 2: Sum totals by category ---
@@ -20,7 +24,10 @@ def count_per_user(events):
 # return {category: total_amount}
 # [{"category": "food", "amount": 10}, {"category": "food", "amount": 5}] => {"food": 15}
 def sum_by_category(records):
-    pass
+    sum_dict = defaultdict(int)
+    for d in records:
+        sum_dict[d['category']] += d['amount']
+    return sum_dict 
 
 
 # --- Problem 3: Average transaction value per account ---
