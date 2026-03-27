@@ -29,7 +29,7 @@ def is_sorted(nums):
 def reverse_in_place(nums):
     left = 0
     right = len(nums) - 1
-    while right > left:
+    while right > left: # stop once right corsses left to avoid re-reversing
         nums[right], nums[left] = nums[left], nums[right]
         left += 1
         right -= 1
@@ -42,21 +42,34 @@ def reverse_in_place(nums):
 # Return their indices as a tuple. Use two pointers, not a dict.
 def two_sum_sorted(nums, target):
     left = 0
-    right = len(nums) - 1
+    right = len(nums) - 1 # start at last index
     while right > left:
         if nums[left] + nums[right] > target:
-            right -= 1
+            right -= 1 # try a smaller right if sum is greater than target
         elif nums[left] + nums[right] < target:
-            left += 1
+            left += 1 # try a larger left if sum is less than target
         elif nums[left] + nums[right] == target:
-            return (left, right)
+            return (left, right) # if equal return tuple
     return None
 
 
 # --- Problem 4: Remove duplicates from sorted array ---
 # Given sorted array, remove dupes in place and return the new length
 # e.g. [1,1,2,2,3] => first 3 elements should be [1,2,3], return 3
+# basically we are writing over the dupes from left to right with the unique numbers found by the read, then progressing the write 1 each time it happens. Read always progresse 1.
+# write always is the position of the next item to be replaced
 def remove_dupes_sorted(nums):
+    read = 1
+    write = 1
+
+    while read < len(nums): # while there are still numbers to read
+        if nums[read] != nums[write - 1]: # if the current read number is different than the last written number, we want to write it
+            nums[write] = nums[read] 
+            write += 1 # move write forward to be ready to write the next unique number
+        read += 1 # always move read forward to keep checking numbers until we reach the end of the list
+
+    return write
+
 
 
 
