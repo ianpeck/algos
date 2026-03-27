@@ -2,7 +2,7 @@
 TWO POINTERS
 ============
 The two-pointer technique — left/right pointers moving toward each other,
-or a slow/fast pointer pattern. Super common in interviews.
+or a slow/fast read/write pointer pattern.
 
 Run this file: python3 problems.py
 """
@@ -29,7 +29,7 @@ def is_sorted(nums):
 def reverse_in_place(nums):
     left = 0
     right = len(nums) - 1
-    while right > left: # stop once right corsses left to avoid re-reversing
+    while right > left: # stop once right crosses left to avoid re-reversing
         nums[right], nums[left] = nums[left], nums[right]
         left += 1
         right -= 1
@@ -64,28 +64,11 @@ def remove_dupes_sorted(nums):
 
     while read < len(nums): # while there are still numbers to read
         if nums[read] != nums[write - 1]: # if the current read number is different than the last written number, we want to write it
-            nums[write] = nums[read] 
+            nums[write] = nums[read]
             write += 1 # move write forward to be ready to write the next unique number
         read += 1 # always move read forward to keep checking numbers until we reach the end of the list
 
     return write
-
-
-
-
-# --- Problem 5: Container with most water (simplified) ---
-# Given array of heights, find two lines that form a container holding the most water
-# Water = min(height[l], height[r]) * (r - l)
-# Return the max water amount
-def max_water(heights):
-    pass
-
-
-# --- Problem 6: Valid palindrome with cleanup ---
-# Check if string is palindrome considering only alphanumeric chars, case insensitive
-# "A man, a plan, a canal: Panama" => True
-def is_valid_palindrome(s):
-    pass
 
 
 # ============ TESTS ============
@@ -125,15 +108,6 @@ if __name__ == "__main__":
     arr2 = [1, 1, 1]
     n2 = remove_dupes_sorted(arr2)
     test("all same", n2, 1)
-
-    print("\n--- Max Water ---")
-    test("basic", max_water([1, 8, 6, 2, 5, 4, 8, 3, 7]), 49)
-    test("simple", max_water([1, 1]), 1)
-
-    print("\n--- Valid Palindrome ---")
-    test("with punctuation", is_valid_palindrome("A man, a plan, a canal: Panama"), True)
-    test("not palindrome", is_valid_palindrome("race a car"), False)
-    test("empty", is_valid_palindrome(""), True)
 
     print(f"\n{'='*30}")
     print(f"Results: {passed} passed, {failed} failed out of {passed+failed}")
