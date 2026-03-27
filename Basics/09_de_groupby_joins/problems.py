@@ -33,8 +33,20 @@ def sum_by_category(records):
 # --- Problem 3: Average transaction value per account ---
 # Given a list of transactions with "account_id" and "amount",
 # return {account_id: average_amount} rounded to 2 decimal places
+# [{"account_id": "A", "amount": 10},{"account_id": "A", "amount": 20},{"account_id": "B", "amount": 5}]
+# return {"A": 15.0, "B": 5.0}
 def avg_per_account(transactions):
-    pass
+    sum_dict = defaultdict(int)
+    count_dict = defaultdict(int)
+    for d in transactions:
+        sum_dict[d['account_id']] += d['amount'] # add amount to running sum for each account_id
+        count_dict[d['account_id']] += 1 # add 1 to count for each account id
+    final_dict = {}
+    for account_id in count_dict.keys(): # for each account id
+        # create sum
+        final_dict[account_id] = round(sum_dict[account_id] / count_dict[account_id], 2)
+    return final_dict
+
 
 
 # --- Problem 4: Hash join two datasets ---

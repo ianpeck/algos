@@ -44,7 +44,7 @@ def group_by_length(words):
     final_dict = {}
     for word in words:
         length_of_word = len(word)
-        if length_of_word not in final_dict:
+        if length_of_word not in final_dict: # could also use defaultdict(list)
             final_dict[length_of_word] = []
         final_dict[length_of_word].append(word)
     return final_dict
@@ -122,6 +122,49 @@ def intersection(a, b):
 
 
 
+# --- Problem 9: Dict comprehension — filter and transform ---
+# Given a dict of {name: score}, return a new dict with only scores >= 70,
+# but multiply each passing score by 1.1 (round to 2 decimal places)
+# must use dict comprehension
+# {"alice": 80, "bob": 60, "carol": 90} => {"alice": 88.0, "carol": 99.0}
+def passing_scores(scores):
+    return {name: round(score * 1.1, 2) for name, score in scores.items() if score >= 70}
+
+
+# --- Problem 10: Nested dict — group and count ---
+# Given a list of (department, employee) tuples, build a nested dict:
+# {department: {"employees": [names], "count": n}}
+# [("eng", "alice"), ("eng", "bob"), ("hr", "carol")]
+# => {"eng": {"employees": ["alice", "bob"], "count": 2}, "hr": {"employees": ["carol"], "count": 1}}
+def group_by_dept(records):
+    result = {}
+    for dept, name in records:
+        if dept not in result:
+            result[dept] = {"employees": [], "count": 0}
+        result[dept]["employees"].append(name)
+        result[dept]["count"] += 1
+    return result
+
+
+# --- Problem 11: Aggregate stats from list of dicts ---
+# Given a list of records like [{"id": "a", "value": 10}, {"id": "a", "value": 20}, ...]
+# return a dict of {id: {"sum": ..., "count": ..., "avg": ...}}
+# avg should be rounded to 2 decimal places
+# [{"id": "a", "value": 10}, {"id": "b", "value": 5}, {"id": "a", "value": 30}]
+# => {"a": {"sum": 40, "count": 2, "avg": 20.0}, "b": {"sum": 5, "count": 1, "avg": 5.0}}
+def aggregate_stats(records):
+    stats = {}
+    for record in records:
+        id = record["id"]
+        val = record["value"]
+        if id not in stats:
+            stats[id] = {"sum": 0, "count": 0, "avg": 0.0}
+        stats[id]["sum"] += val
+        stats[id]["count"] += 1
+        stats[id]["avg"] = round(stats[id]["sum"] / stats[id]["count"], 2)
+    return stats
+
+
 # ============ TESTS ============
 if __name__ == "__main__":
     passed = 0
@@ -167,6 +210,25 @@ if __name__ == "__main__":
     test("basic", intersection([1, 2, 3, 4], [3, 4, 5, 6]), [3, 4])
     test("none", intersection([1, 2], [3, 4]), [])
     test("dupes", intersection([1, 1, 2], [1, 1]), [1])
+
+    print("\n--- Passing Scores ---")
+    test("basic", passing_scores({"alice": 80, "bob": 60, "carol": 90}), {"alice": 88.0, "carol": 99.0})
+    test("none pass", passing_scores({"x": 50, "y": 60}), {})
+    test("all pass", passing_scores({"a": 70, "b": 100}), {"a": 77.0, "b": 110.0})
+
+    print("\n--- Group By Dept ---")
+    test("basic", group_by_dept([("eng", "alice"), ("eng", "bob"), ("hr", "carol")]),
+         {"eng": {"employees": ["alice", "bob"], "count": 2}, "hr": {"employees": ["carol"], "count": 1}})
+    test("single", group_by_dept([("eng", "alice")]),
+         {"eng": {"employees": ["alice"], "count": 1}})
+
+    print("\n--- Aggregate Stats ---")
+    test("basic", aggregate_stats([{"id": "a", "value": 10}, {"id": "b", "value": 5}, {"id": "a", "value": 30}]),
+         {"a": {"sum": 40, "count": 2, "avg": 20.0}, "b": {"sum": 5, "count": 1, "avg": 5.0}})
+    test("single", aggregate_stats([{"id": "x", "value": 7}]),
+         {"x": {"sum": 7, "count": 1, "avg": 7.0}})
+    test("three ids", aggregate_stats([{"id": "a", "value": 1}, {"id": "b", "value": 2}, {"id": "c", "value": 3}]),
+         {"a": {"sum": 1, "count": 1, "avg": 1.0}, "b": {"sum": 2, "count": 1, "avg": 2.0}, "c": {"sum": 3, "count": 1, "avg": 3.0}})
 
     print(f"\n{'='*30}")
     print(f"Results: {passed} passed, {failed} failed out of {passed+failed}")
