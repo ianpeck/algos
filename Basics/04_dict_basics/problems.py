@@ -14,9 +14,9 @@ Run this file: python3 problems.py
 def word_count(words):
     cnt_dict = {}
     for word in words:
-        if word not in cnt_dict.keys():
+        if word not in cnt_dict:
             cnt_dict[word] = 0
-        if word in cnt_dict.keys(): # this has to be if to esnure it runs right after the word gets added
+        if word in cnt_dict:
             cnt_dict[word] += 1
     return cnt_dict
 
